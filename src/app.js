@@ -52,6 +52,7 @@ app.use((req, res, next) => {
 // Genaric error handler middleware.
 // All errors is catched here.
 app.use((error, req, res, next) => {
+  // While creating the place OR removing the place if the session fails to commit, we will remove the image from the server.
   if (req.file) {
     fs.unlink(req.file.path, (err) => {
       console.log(err);

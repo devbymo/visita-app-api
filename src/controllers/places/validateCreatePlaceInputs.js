@@ -4,7 +4,7 @@ const isInputDataValid = require('../../utils/isInputsValid');
 const getCoordinates = require('../../utils/getCoordinates');
 
 const validateCreatePlaceInputs = async (req, res, next) => {
-  // Add image to the body if it is not provided.
+  // Add a default image to the body if it isn't provided.
   req.body.image = req.file.path
     ? `${req.file.destination}/${req.file.filename}`
     : 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60';

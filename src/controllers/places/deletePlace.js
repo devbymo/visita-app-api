@@ -55,7 +55,9 @@ const deletePlace = async (req, res, next) => {
 
   // Remove the image from the server.
   const { image: imagePath } = place;
-  fs.unlink(imagePath, (err) => {});
+  fs.unlink(imagePath, (err) => {
+    return next(new HttpError(err.message, 500));
+  });
 
   res.status(200).json({
     message: 'Place deleted successfuly.',
