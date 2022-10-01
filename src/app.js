@@ -7,6 +7,7 @@ const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 
 const app = express();
 
@@ -18,12 +19,13 @@ const app = express();
 app.use(express.json());
 
 // CORS middleware
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', '*');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  next();
-});
+app.use(cors());
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Headers', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+//   next();
+// });
 
 // Staticly serve the images folder.
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
