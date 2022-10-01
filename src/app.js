@@ -17,6 +17,14 @@ const app = express();
 // Parse incoming requests data.
 app.use(express.json());
 
+// CORS middleware
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  next();
+});
+
 // Staticly serve the images folder.
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
@@ -31,14 +39,6 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour.',
 });
 app.use(limiter);
-
-// CORS middleware
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-  next();
-});
 
 // API routes.
 app.use('/api/v1/places', placesRoutes);
