@@ -19,13 +19,14 @@ const app = express();
 app.use(express.json());
 
 // CORS middleware
-app.use(cors());
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-//   next();
-// });
+// app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
+  next();
+});
 
 // Staticly serve the images folder.
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
