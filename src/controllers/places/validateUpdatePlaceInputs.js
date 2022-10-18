@@ -29,6 +29,26 @@ const validateUpdatePlaceInputs = async (req, res, next) => {
     );
   }
 
+  // validate title and description.
+  const { title, description } = req.body;
+  if (title) {
+    const isTitleValid = title.length >= 5;
+    if (!isTitleValid) {
+      return next(
+        new HttpError('Title must be at least 5 characters long.', 400)
+      );
+    }
+  }
+
+  if (description) {
+    const isDescriptionValid = description.length >= 5;
+    if (!isDescriptionValid) {
+      return next(
+        new HttpError('Description must be at least 5 characters long.', 400)
+      );
+    }
+  }
+
   // Find the place.
   let place;
   try {

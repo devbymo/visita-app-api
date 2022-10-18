@@ -34,9 +34,6 @@ app.use(cors(corsOptions));
 //   next();
 // });
 
-// Staticly serve the images folder.
-app.use('/uploads/images', express.static(path.join('uploads', 'images')));
-
 // HTTP security headers.
 app.use(helmet());
 
@@ -48,6 +45,9 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour.',
 });
 app.use(limiter);
+
+// Staticly serve the images folder.
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 // API routes.
 app.use('/api/v1/places', placesRoutes);
