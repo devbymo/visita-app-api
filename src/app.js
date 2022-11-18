@@ -19,20 +19,7 @@ const app = express();
 app.use(express.json());
 
 // CORS middleware
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-  methods: 'GET,PATCH,POST,DELETE',
-  preflightContinue: false,
-};
-app.use(cors(corsOptions));
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-//   res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
-//   next();
-// });
+app.use(cors());
 
 // HTTP security headers.
 app.use(helmet());
